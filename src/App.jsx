@@ -1,10 +1,11 @@
 import LogIn from './components/LogIn.jsx';
 import "./App.css"
-import NavBar from './components/NavBar.jsx';
+import NavBar from './components/NavBar/NavBar.jsx';
 
 function App() {
 
   const userLoggedIn = localStorage.getItem("LoggedIn");
+  
   if(userLoggedIn==null)
   {
     localStorage.setItem("LoggedIn",false);
@@ -15,8 +16,9 @@ function App() {
   }
   return (
     <>
-    {/* <LogIn/> */}
     <NavBar/>
+    {/* <LogIn/> */}
+    
     </>
   )
 }
