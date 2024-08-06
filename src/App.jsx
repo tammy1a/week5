@@ -1,6 +1,8 @@
 import LogIn from './components/LogIn.jsx';
 import "./App.css"
 import NavBar from './components/NavBar/NavBar.jsx';
+import { Card } from '@mui/material';
+import Task  from './components/Task.jsx';
 
 function App() {
 
@@ -14,9 +16,13 @@ function App() {
   {
     console.log(userLoggedIn)
   }
+  const currentLoggedUser = localStorage.getItem("CurrentUser");
+
   return (
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
+    <Task/>
+    
     {/* <LogIn/> */}
     
     </>
