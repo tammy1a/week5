@@ -1,8 +1,11 @@
 import LogIn from './components/LogIn.jsx';
 import "./App.css"
 import NavBar from './components/NavBar/NavBar.jsx';
-import { Card } from '@mui/material';
-import Task  from './components/Task.jsx';
+import { Card, Input } from '@mui/material';
+import { AddTask } from './components/AddTask.jsx';
+import Task from './components/Task.jsx';
+import { Router } from 'react-router-dom';
+
 
 function App() {
 
@@ -18,12 +21,16 @@ function App() {
   }
   const currentLoggedUser = localStorage.getItem("CurrentUser");
 
+
   return (
     <>
-    {/* <NavBar/> */}
-    <Task/>
+
+
+    <NavBar/>
+    <AddTask/>
+    {/* <Task/> */}
     
-    {/* <LogIn/> */}
+    <LogIn/>
     
     </>
   )

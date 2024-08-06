@@ -1,5 +1,4 @@
 import {  Box, Button, Paper, Typography } from '@mui/material';
-
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { DeleteRounded } from '@mui/icons-material';
 const Task = () => {
