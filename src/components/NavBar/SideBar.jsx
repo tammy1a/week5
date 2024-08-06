@@ -13,8 +13,12 @@ const SideBar = ({LoggedIn}) => {
         flexGrow: 1,
       }}
     >
+      {
+        LoggedIn==true?<>
       <MenuItem>TODOS</MenuItem>
       <MenuItem>Profile</MenuItem>
+        </>:""
+      }
       <MenuItem>About</MenuItem>
       <Divider />
       <MenuItem>
@@ -32,6 +36,6 @@ const SideBar = ({LoggedIn}) => {
   );
 };
 SideBar.propTypes={
-    LoggedIn : PropTypes.bool.isRequired
+    LoggedIn : PropTypes.string.isRequired
 }
 export default SideBar;

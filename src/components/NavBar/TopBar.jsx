@@ -29,6 +29,8 @@ const TopBar = ({ LoggedIn }) => {
           alt="logo of sitemark"
         />
         <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+          {
+            LoggedIn==true?<>
           <MenuItem sx={{ py: "6px", px: "12px" }}>
             <Typography variant="body2" color="text.primary">
               TODOS
@@ -39,6 +41,8 @@ const TopBar = ({ LoggedIn }) => {
               Profile
             </Typography>
           </MenuItem>
+            </>:""
+          }
           <MenuItem sx={{ py: "6px", px: "12px" }} >
             <Typography variant="body2" color="text.primary">
               About
@@ -62,7 +66,7 @@ const TopBar = ({ LoggedIn }) => {
                 component="a"
                 href="./"
               >
-                Sign up
+                Sign In
               </Button>
             </Box>
     </>
@@ -70,7 +74,7 @@ const TopBar = ({ LoggedIn }) => {
 };
 
 TopBar.propTypes = {
-  LoggedIn: PropTypes.bool.isRequired,
+  LoggedIn: PropTypes.string.isRequired,
 };
 
 export default TopBar;

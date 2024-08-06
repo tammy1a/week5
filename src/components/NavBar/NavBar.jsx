@@ -17,6 +17,7 @@ function NavBar({ mode, toggleColorMode,LoggedIn }) {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+  console.log(LoggedIn)
 
   return (
     <div>
@@ -53,7 +54,7 @@ function NavBar({ mode, toggleColorMode,LoggedIn }) {
             })}
           >
             
-            <TopBar/>
+            <TopBar LoggedIn={LoggedIn}/>
             <Box sx={{ display: { sm: "none" } }}>
               <Button
                 variant="text"
@@ -65,7 +66,7 @@ function NavBar({ mode, toggleColorMode,LoggedIn }) {
                 <MenuIcon />
               </Button>
               <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-                <SideBar/>
+                <SideBar LoggedIn={LoggedIn} />
               </Drawer>
             </Box>
           </Toolbar>
@@ -78,7 +79,7 @@ function NavBar({ mode, toggleColorMode,LoggedIn }) {
 NavBar.propTypes = {
 //   mode: PropTypes.oneOf(["dark", "light"]).isRequired,
 //   toggleColorMode: PropTypes.func.isRequired,
-  LoggedIn:PropTypes.bool.isRequired
+  LoggedIn:PropTypes.string.isRequired
 };
 
 export default NavBar;
