@@ -11,7 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import TopBar from "./TopBar";
 import SideBar from "./SideBar";
 
-function NavBar({ mode, toggleColorMode,LoggedIn }) {
+function NavBar({LoggedIn }) {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {

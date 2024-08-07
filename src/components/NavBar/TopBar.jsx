@@ -1,6 +1,6 @@
-import * as React from "react";
 import PropTypes from "prop-types";
 import { Box, Button, MenuItem, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const logoStyle = {
     width: "140px",
@@ -9,7 +9,18 @@ const logoStyle = {
   };
   
 
-const TopBar = ({ LoggedIn }) => {
+const TopBar = () => {
+  
+  const userLoggedIn = localStorage.getItem("LoggedIn") ==='true';
+  const handleSignInOut = ()=>{
+    if(userLoggedIn)
+    {
+      localStorage.setItem("LoggedIn",false);
+      localStorage.setItem("CurrentUser","");
+    }
+    window.location.href ="./login"
+
+  }
   return (
     <>
       <Box
@@ -30,22 +41,24 @@ const TopBar = ({ LoggedIn }) => {
         />
         <Box sx={{ display: { xs: "none", sm: "flex" } }}>
           {
-            LoggedIn==true?<>
+            userLoggedIn==true?<>
           <MenuItem sx={{ py: "6px", px: "12px" }}>
             <Typography variant="body2" color="text.primary">
-              TODOS
+            <Link to="/todos" className="nav-link">
+              To-dos
+            </Link>
             </Typography>
           </MenuItem>
           <MenuItem sx={{ py: "6px", px: "12px" }}>
             <Typography variant="body2" color="text.primary">
-              Profile
+              <Link to="./profile">Profile</Link>
             </Typography>
           </MenuItem>
             </>:""
           }
           <MenuItem sx={{ py: "6px", px: "12px" }} >
             <Typography variant="body2" color="text.primary">
-              About
+              <Link to="./about">About</Link>
             </Typography>
           </MenuItem>
         </Box>
@@ -64,9 +77,9 @@ const TopBar = ({ LoggedIn }) => {
                 variant="contained"
                 size="small"
                 component="a"
-                href="./"
+                onClick={handleSignInOut}
               >
-                Sign In
+                {userLoggedIn?"Sign Out":"Sign In"}
               </Button>
             </Box>
     </>

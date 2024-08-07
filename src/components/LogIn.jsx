@@ -1,29 +1,35 @@
 /* eslint-disable no-unused-vars */
-import * as React from 'react';
-import { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import * as React from "react";
+import { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import users from "../assets/users.json";
+import { Alert } from "@mui/material";
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="./">
-       TODO App
-      </Link>{' '}
+        TODO App
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -32,9 +38,10 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 export default function LogIn() {
-  const [email,setEmail] = useState("");
-  const [emailError,setEmailError] = useState(false);
-  const handleEmailChange = e => {
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [credentialError, setCredentialError] = useState(false);
+  const handleEmailChange = (e) => {
     setEmail(e.target.value);
     if (e.target.validity.valid) {
       setEmailError(false);
@@ -47,9 +54,22 @@ export default function LogIn() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+    const email = data.get("email");
+    const password = data.get("password");
+    const found = users.users.some(
+      (user) => user.username === email && user.password === password
+    );
+    setCredentialError(!found);
+    if(found)
+    {
+      localStorage.setItem("LoggedIn",true);
+      localStorage.setItem("CurrentUser",email.split('@')[0]);
+      window.location.href = "./profile"
+    }
+
     console.log({
-      email:data.get('email'),
-      password: data.get('password'),
+      email,
+      password,
     });
   };
 
@@ -60,15 +80,21 @@ export default function LogIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <Typography component="h1" variant="h4">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={!emailError? handleSubmit:undefined} noValidate={false} sx={{ mt: 1 }}>
+          {credentialError?<Alert severity="error">Email or Password not matched</Alert>:""}
+          <Box
+            component="form"
+            onSubmit={!emailError ? handleSubmit : undefined}
+            noValidate={false}
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -81,9 +107,7 @@ export default function LogIn() {
               autoComplete="email"
               autoFocus
               type="email"
-              helperText={
-                emailError? "Please type a valid email":""
-              }
+              helperText={emailError ? "Please type a valid email" : ""}
               error={emailError}
             />
             <TextField
@@ -104,10 +128,9 @@ export default function LogIn() {
             >
               Sign In
             </Button>
-
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright sx={{ mt: 0, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

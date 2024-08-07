@@ -1,9 +1,19 @@
 import { Box, Button, Divider, MenuItem } from "@mui/material";
-import React from "react";
 import PropTypes from 'prop-types'
+import { Link } from "react-router-dom";
 
 
-const SideBar = ({LoggedIn}) => {
+const SideBar = () => {
+
+  const userLoggedIn = localStorage.getItem("LoggedIn")==="true";
+  const handleSignInOut = ()=>{
+    if(userLoggedIn)
+    {
+      localStorage.setItem("LoggedIn",false);
+      localStorage.setItem("CurrentUser","");
+    }
+    window.location.href ="./login"
+  }
   return (
     <Box
       sx={{
@@ -14,22 +24,30 @@ const SideBar = ({LoggedIn}) => {
       }}
     >
       {
-        LoggedIn==true?<>
-      <MenuItem>TODOS</MenuItem>
-      <MenuItem>Profile</MenuItem>
+        userLoggedIn==true?<>
+      <MenuItem>
+      <Link to="./todos">
+        To-dos
+      </Link>
+      </MenuItem>
+      <MenuItem>
+      <Link to={"./profile"}>Profile</Link>
+      </MenuItem>
         </>:""
       }
-      <MenuItem>About</MenuItem>
+      <MenuItem>
+      <Link to="./about">About</Link>
+      </MenuItem>
       <Divider />
       <MenuItem>
         <Button
           color="primary"
           variant="contained"
           component="a"
-          href="./"
           sx={{ width: "100%" }}
+          onClick={handleSignInOut}
         >
-          Sign in
+          {userLoggedIn?"Sign Out":"Sign In"}
         </Button>
       </MenuItem>
     </Box>
