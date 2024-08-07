@@ -1,6 +1,5 @@
 import { Avatar } from '@mui/material'
 import { deepOrange, deepPurple } from '@mui/material/colors'
-import React from 'react'
 
 const UserDetails = () => {
   return (
