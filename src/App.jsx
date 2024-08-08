@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import UserDetails from "./components/UserDetails.jsx";
 import About from "./components/About.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Tasks from "./components/Tasks.jsx";
 
 function App() {
   const userLoggedIn = localStorage.getItem("LoggedIn");
@@ -36,6 +37,7 @@ function App() {
 
               <Route path="/" element={<Navigate to="/profile" />} />
               <Route path="/profile" element={<UserDetails />} />
+              <Route path="/todos" element={<Tasks/>}/>
 
             </Route>
 

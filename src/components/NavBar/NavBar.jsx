@@ -27,7 +27,7 @@ function NavBar({LoggedIn }) {
           boxShadow: 0,
           bgcolor: "transparent",
           backgroundImage: "none",
-          mt: 2,
+          mt: 0
         }}
       >
         <Container maxWidth="lg">

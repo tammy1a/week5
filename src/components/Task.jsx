@@ -1,7 +1,7 @@
 import {  Box, Button, Paper, Typography } from '@mui/material';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import { DeleteRounded } from '@mui/icons-material';
-const Task = () => {
+const Task = ({title,completed,handleTick,onDelete}) => {
 
   return (
    <>
@@ -23,14 +23,15 @@ const Task = () => {
         display:'flex',
         justifyContent:"space-between"
       }}>
-        <Typography variant="h6" textAlign={'left'} >
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat architecto perferendis veniam corrupti sunt. Possimus magni iste iure eum laborum error ea quo vero. Placeat voluptas adipisci quidem aspernatur autem.
+        <Typography variant="p" textAlign={'left'} sx={{textDecoration: completed?"line-through":""}} >
+           {title} 
         </Typography>
         <Box display={'flex'}>
-        <Button onClick={()=>{console.log("Hello")}}>
+
+        {completed!==true && <Button onClick={()=>handleTick(title)}>
             <CheckRoundedIcon/>
-        </Button>
-        <Button onClick={()=>{console.log("delete")}}
+        </Button>}
+        <Button onClick={()=>onDelete(title)}
             sx={{color:'red'}}>
             <DeleteRounded/>
         </Button>
