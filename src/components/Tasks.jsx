@@ -37,6 +37,27 @@ const Tasks = () => {
     task.completed = true;
     setTasks(Tasks.map((elem) => elem));
   }
+  async function postTask(task) {
+    try {
+      const response = await axios.post('https://jsonplaceholder.typicode.com/posts',task, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      });
+      
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+    const addTask = () => {
+      if (input!="") {
+        postTask({user_id:1,title:input,completed:false});
+        
+        setTasks([{user_id:input,title:input,completed:false},...Tasks]);
+        setInput("");
+      }
+    }
   const fetchTodos = async () => {
     try {
       setLoading(true);
@@ -64,7 +85,7 @@ const Tasks = () => {
   return (
     <>
       <div className="tasks-container" style={{ margin: "10" }}>
-        <InputTask input={input} setInput={setInput} />
+        <InputTask input={input} setInput={setInput} addTask={addTask}/>
 
         <Typography variant="h5" sx={{ mt: 2 }}>
           Pending
